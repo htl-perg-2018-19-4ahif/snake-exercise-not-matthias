@@ -1,3 +1,15 @@
+// Renderer instance
+const renderer = require('./renderer')
+
+const screenHeight = 200;
+const screenWidth = 80;
+
+// Draw Borders
+renderer.setCursorColor(0);
+renderer.drawRect(0, 0, screenHeight, screenWidth);
+
+
+
 // Export the direction so other files can use it
 // 0    =   Left
 // 1    =   Up
@@ -6,7 +18,12 @@
 module.exports.direction = 0;
 
 
-// Our draw function, to render all the stuff in the console
 module.exports.drawFunction = () => {
-    // console.log(this.direction);
+    // Draw the snake
+    drawSnake();
+}
+
+
+drawSnake = () => {
+
 }

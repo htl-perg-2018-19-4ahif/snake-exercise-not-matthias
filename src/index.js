@@ -1,16 +1,22 @@
 // Clear the console to hide the execute command
-console.clear();
+process.stdout.write('\x1Bc');
+
 
 // Cool logo
 const chalkAnimation = require('chalk-animation');
-chalkAnimation.rainbow('Snake by not-matthias');
+// chalkAnimation.rainbow('Snake by not-matthias');
 
 
-// Start our input listener
+// ###########################################
+//              Input listener
+// ###########################################
 require('./input-listener.js')
 
-// Run our draw function with x fps
-const snake = require('./snake')
-const FPS = 60;
 
-setInterval(snake.drawFunction, FPS / 1000);
+// ###########################################
+//              Draw Function
+// ###########################################
+const snake = require('./snake')
+const snakeSpeed = 3;
+
+setInterval(snake.drawFunction, 1000 / snakeSpeed);
