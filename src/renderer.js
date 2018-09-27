@@ -69,6 +69,12 @@ module.exports.drawRect = (x, y, lengthX, lengthY) => {
     this.drawVerticalLine(x + lengthX, y, lengthY);
 }
 
+module.exports.drawFilledRect = (x, y, lengthX, lengthY) => {
+    for(let i = 0; i < lengthY; i++) {
+        this.drawHorizontalLine(x, y + i, lengthX);
+    }
+}
+
 
 module.exports.drawLine = (x1, y1, length) => {
 

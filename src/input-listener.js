@@ -23,7 +23,7 @@ process.stdin.on('keypress', function (ch, key) {
 
         case 'up':
             snake.directionX = 0;
-            snake.directionY = 1;
+            snake.directionY = -1;
             break;
 
         case 'right':
@@ -33,7 +33,7 @@ process.stdin.on('keypress', function (ch, key) {
 
         case 'down':
             snake.directionX = 0;
-            snake.directionY = -1;
+            snake.directionY = 1;
             break;
 
         case 'c':

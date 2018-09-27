@@ -1,8 +1,8 @@
 // Renderer instance
 const renderer = require('./renderer')
 
-const screenWidth = 200;
-const screenHeight = 80;
+const screenWidth = 80;
+const screenHeight = 50;
 
 // TODO: snake as array
 let snakeX = screenWidth / 2;
@@ -13,10 +13,12 @@ module.exports.directionY = 0;
 
 
 // Draw Borders
-renderer.setCursorColor(1);
+renderer.setCursorColor(5);
 renderer.drawRect(0, 0, screenWidth, screenHeight);
-renderer.resetBackground();
 
+renderer.setCursorColor(2);
+renderer.drawFilledRect(2, 2, screenWidth - 3, screenHeight - 2);
+renderer.resetBackground();
 
 
 module.exports.drawFunction = () => {
@@ -26,11 +28,12 @@ module.exports.drawFunction = () => {
 }
 
 removeSnake = () => {
-    renderer.setCursorColor(0);
+    renderer.setCursorColor(2);
     renderer.drawPoint(snakeX, snakeY);
 }
 
 drawSnake = () => {
+    renderer.setCursorColor(4);
     renderer.drawPoint(snakeX, snakeY);
 }
 
