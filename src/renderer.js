@@ -5,8 +5,8 @@ const cursor = ansi(process.stdout);
 
 
 // Colors: 
-// 0    =   Red
-// 1    =   Grey
+// 0    =   Black
+// 1    =   Red
 // 2    =   White
 // 3    =   Green
 // 4    =   Yellow
@@ -14,12 +14,11 @@ const cursor = ansi(process.stdout);
 module.exports.setCursorColor = (color) => {
     switch (color) {
         case 0:
-            cursor.bg.red();
+            cursor.bg.black();
             break;
 
         case 1:
-            console.log("Cursor is now grey!");
-            cursor.bg.grey();
+            cursor.bg.red();
             break;
 
         case 2:
@@ -38,6 +37,10 @@ module.exports.setCursorColor = (color) => {
             cursor.bg.blue();
             break;
     }
+}
+
+module.exports.resetBackground = () => {
+    cursor.bg.reset();
 }
 
 

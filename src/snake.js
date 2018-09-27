@@ -5,9 +5,9 @@ const screenHeight = 200;
 const screenWidth = 80;
 
 // Draw Borders
-renderer.setCursorColor(0);
+renderer.setCursorColor(1);
 renderer.drawRect(0, 0, screenHeight, screenWidth);
-
+renderer.resetBackground();
 
 
 // Export the direction so other files can use it
