@@ -19,4 +19,4 @@ require('./input-listener.js')
 const snake = require('./snake')
 const snakeSpeed = 3;
 
-setInterval(snake.drawFunction, 1000 / snakeSpeed);
+setInterval(snake.mainLoop, 1000 / snakeSpeed);
