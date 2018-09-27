@@ -20,9 +20,14 @@ renderer.resetBackground();
 
 
 module.exports.drawFunction = () => {
-    // Draw the snake
-    drawSnake();
+    removeSnake();
     moveSnake();
+    drawSnake();
+}
+
+removeSnake = () => {
+    renderer.setCursorColor(0);
+    renderer.drawPoint(snakeX, snakeY);
 }
 
 drawSnake = () => {
