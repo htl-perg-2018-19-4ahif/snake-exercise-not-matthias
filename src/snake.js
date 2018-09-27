@@ -1,21 +1,21 @@
 // Renderer instance
 const renderer = require('./renderer')
 
-const screenHeight = 200;
-const screenWidth = 80;
+const screenWidth = 200;
+const screenHeight = 80;
+
+const snakeX = screenWidth / 2;
+const snakeY = screenHeight / 2;
+
+module.exports.directionX = 0;
+module.exports.directionY = 0;
+
 
 // Draw Borders
 renderer.setCursorColor(1);
-renderer.drawRect(0, 0, screenHeight, screenWidth);
+renderer.drawRect(0, 0, screenWidth, screenHeight);
 renderer.resetBackground();
 
-
-// Export the direction so other files can use it
-// 0    =   Left
-// 1    =   Up
-// 2    =   Right
-// 3    =   Down
-module.exports.direction = 0;
 
 
 module.exports.drawFunction = () => {
@@ -23,7 +23,11 @@ module.exports.drawFunction = () => {
     drawSnake();
 }
 
-
 drawSnake = () => {
+    
+}
 
+moveSnake = () => {
+    snakeX += directionX;
+    snakeY += directionY;
 }

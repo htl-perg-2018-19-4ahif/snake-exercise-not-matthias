@@ -2,11 +2,11 @@ const keypress = require('keypress');
 const snake = require('./snake')
 
 
-// list for keyboard inputs
+// List for keyboard inputs
 keypress(process.stdin);
 
 
-// listen for keypresss
+// Listen for keypresss
 process.stdin.on('keypress', function (ch, key) {
 
     // Type         KeyCode     Name
@@ -17,23 +17,23 @@ process.stdin.on('keypress', function (ch, key) {
 
     switch (key.name) {
         case 'left':
-            console.log('left');
-            snake.direction = 0;
+            snake.directionX = -1;
+            snake.directionY = 0;
             break;
 
         case 'up':
-            console.log('up');
-            snake.direction = 1;
+            snake.directionX = 0;
+            snake.directionY = 1;
             break;
 
         case 'right':
-            console.log('right');
-            snake.direction = 2;
+            snake.directionX = 1;
+            snake.directionY = 0;
             break;
 
         case 'down':
-            console.log('down');
-            snake.direction = 3;
+            snake.directionX = 0;
+            snake.directionY = -1;
             break;
 
         case 'c':
@@ -41,9 +41,6 @@ process.stdin.on('keypress', function (ch, key) {
                 process.exit(0);
             else
                 break;
-
-        default:
-            // Do nothing...
     }
 });
 
