@@ -8,5 +8,5 @@ module.exports.direction = 0;
 
 // Our draw function, to render all the stuff in the console
 module.exports.drawFunction = () => {
-    console.log(this.direction);
+    // console.log(this.direction);
 }

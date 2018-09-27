@@ -15,7 +15,6 @@ process.stdin.on('keypress', function (ch, key) {
     // ArrowRight   = 39        = right 
     // ArrowDown    = 40        = down
 
-
     switch (key.name) {
         case 'left':
             console.log('left');
