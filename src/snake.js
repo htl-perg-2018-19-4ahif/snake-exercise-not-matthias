@@ -32,12 +32,12 @@ removeSnake = () => {
     renderer.drawPoint(snakeX, snakeY);
 }
 
-drawSnake = () => {
-    renderer.setCursorColor(4);
-    renderer.drawPoint(snakeX, snakeY);
-}
-
 moveSnake = () => {
     snakeX += this.directionX;
     snakeY += this.directionY;
+}
+
+drawSnake = () => {
+    renderer.setCursorColor(4);
+    renderer.drawPoint(snakeX, snakeY);
 }
