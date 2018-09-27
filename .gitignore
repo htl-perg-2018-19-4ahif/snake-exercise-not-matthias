@@ -71,3 +71,9 @@ typings/
 
 # Serverless directories
 .serverless
+
+
+
+
+# Don't upload the settings of the "Make  Hidden"plugin
+.vscode
