@@ -5,12 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "chalk-animation": "^1.6.0",
-    "keypress": "^0.2.1",
-    "nodemon": "^1.18.4"
+    "keypress": "^0.2.1"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
