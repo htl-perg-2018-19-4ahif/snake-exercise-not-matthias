@@ -3,6 +3,9 @@
 const ansi = require('ansi');
 const cursor = ansi(process.stdout);
 
+module.exports.hideCursor = () => {
+    cursor.write('\x1B[?25l');
+}
 
 // Colors: 
 // 0    =   Black

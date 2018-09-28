@@ -21,6 +21,7 @@ let appleY;
 module.exports.directionX = 1;
 module.exports.directionY = 0;
 
+renderer.hideCursor();
 
 
 // Draw Borders
