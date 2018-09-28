@@ -108,3 +108,7 @@ module.exports.drawHorizontalLine = (x, y, length) => {
         this.drawPoint(x + i, y);
     }
 }
+
+module.exports.drawText = (x, y, text) => {
+    cursor.goto(x, y).write(text);
+}
