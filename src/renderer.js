@@ -36,13 +36,16 @@ module.exports.setCursorColor = (color) => {
         case 5:
             cursor.bg.blue();
             break;
+
+        case 6:
+            cursor.bg.grey();
+            break;
     }
 }
 
 module.exports.resetBackground = () => {
     cursor.bg.reset();
 }
-
 
 module.exports.drawPoint = (x, y) => {
     cursor.goto(x, y).write(' ');
@@ -70,7 +73,7 @@ module.exports.drawRect = (x, y, lengthX, lengthY) => {
 }
 
 module.exports.drawFilledRect = (x, y, lengthX, lengthY) => {
-    for(let i = 0; i < lengthY; i++) {
+    for (let i = 0; i < lengthY; i++) {
         this.drawHorizontalLine(x, y + i, lengthX);
     }
 }
