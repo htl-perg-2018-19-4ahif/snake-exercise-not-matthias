@@ -42,12 +42,12 @@ renderer.drawFilledRect(2, 2, playWidth - 1, playHeight);
 
 module.exports.mainLoop = () => {
 
-    // Only move and remove when in game
-    if (!gameOver) {
+    // Only move when ingame or not eating an apple
+    if (!gameOver && !checkApple()) {
         removeSnake();
         moveSnake();
-        checkApple();
     }
+
 
     // Check if outside, if not draw
     if ((gameOver = checkBorders())) {
@@ -59,12 +59,16 @@ module.exports.mainLoop = () => {
         drawSnake();
     }
 
+
     // Print statistic
     let score = "Score: " + points;
     renderer.drawText(0, screenHeight + 2, score);
 
     let speed = "Speed: " + this.snakeSpeed;
     renderer.drawText(0, screenHeight + 3, speed);
+
+    renderer.drawText(0, screenHeight + 5, snake[0].x + "");
+    renderer.drawText(0, screenHeight + 6, snake[0].y + "");
 };
 
 
@@ -86,8 +90,16 @@ checkApple = () => {
         points += 1;
         snakeSize += 1;
 
+        // add new head
+        snake.unshift({
+            x: snake[0].x + this.directionX,
+            y: snake[0].y + this.directionY
+        });
+
         drawApple();
+        return true;
     }
+    return false;
 }
 
 removeSnake = () => {
@@ -103,8 +115,15 @@ removeSnake = () => {
 };
 
 moveSnake = () => {
-    snake[0].x += this.directionX;
-    snake[0].y += this.directionY;
+    // add new head
+    snake.unshift({
+        x: snake[0].x + this.directionX,
+        y: snake[0].y + this.directionY
+    });
+
+    // remove the tail
+    if(snake > 1)
+        snake.pop();
 };
 
 drawSnake = () => {
