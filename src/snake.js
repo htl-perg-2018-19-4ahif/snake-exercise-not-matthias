@@ -10,8 +10,8 @@ const playHeight = screenHeight - 2;
 
 // Game stuff
 let snake = [{
-    x: 7, // screenWidth / 2,
-    y: 4, // screenHeight / 2
+    x: screenWidth / 2,
+    y: screenHeight / 2
 }];
 
 let appleX;
@@ -41,7 +41,6 @@ renderer.drawFilledRect(2, 2, playWidth - 1, playHeight);
 
 
 module.exports.mainLoop = () => {
-    // drawApple();
 
     // Only move and remove when in game
     if (!gameOver) {
@@ -50,15 +49,22 @@ module.exports.mainLoop = () => {
         checkApple();
     }
 
-
     // Check if outside, if not draw
     if ((gameOver = checkBorders())) {
         renderer.setCursorColor(1); // Red
-        let middleOffset = Math.floor(9 / 2); // draw the text in the middle
+
+        let middleOffset = Math.floor("Game Over".length / 2);
         renderer.drawText(screenWidth / 2 - middleOffset, screenHeight / 2, "Game Over");
     } else {
         drawSnake();
     }
+
+    // Print statistic
+    let score = "Score: " + points;
+    renderer.drawText(0, screenHeight + 2, score);
+
+    let speed = "Speed: " + this.snakeSpeed;
+    renderer.drawText(0, screenHeight + 3, speed);
 };
 
 
@@ -74,10 +80,11 @@ checkBorders = () => {
     }
 };
 
-checkApple = () => {    
+checkApple = () => {
     if (snake[0].x == appleX && snake[0].y == appleY) {
         this.snakeSpeed += 1;
         points += 1;
+        snakeSize += 1;
 
         drawApple();
     }
@@ -117,6 +124,7 @@ drawApple = () => {
 getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
 };
+
 
 // Draw an apple
 drawApple();
