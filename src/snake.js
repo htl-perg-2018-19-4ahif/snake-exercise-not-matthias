@@ -9,13 +9,21 @@ const playWidth = screenWidth - 2;
 const playHeight = screenHeight - 2;
 
 // Game stuff
-let snakeX = 2; // screenWidth / 2;
-let snakeY = 2; // screenHeight / 2;
+let snake = [{
+    x: 7, // screenWidth / 2,
+    y: 4, // screenHeight / 2
+}];
 
 let appleX;
 let appleY;
 
+let snakeSize = 1;
+
+// Statistics
+module.exports.snakeSpeed = 3;
+let points = 0;
 let gameOver = false;
+
 
 // Directions
 module.exports.directionX = 1;
@@ -31,6 +39,7 @@ renderer.drawRect(0, 0, screenWidth, screenHeight);
 renderer.setCursorColor(2); // White
 renderer.drawFilledRect(2, 2, playWidth - 1, playHeight);
 
+
 module.exports.mainLoop = () => {
     // drawApple();
 
@@ -38,7 +47,9 @@ module.exports.mainLoop = () => {
     if (!gameOver) {
         removeSnake();
         moveSnake();
+        checkApple();
     }
+
 
     // Check if outside, if not draw
     if ((gameOver = checkBorders())) {
@@ -50,42 +61,62 @@ module.exports.mainLoop = () => {
     }
 };
 
+
 checkBorders = () => {
     // Left and Right Vertical Border
-    if (snakeX < 2 || snakeX >= screenWidth) {
+    if (snake[0].x < 2 || snake[0].x >= screenWidth) {
         return true;
     }
 
     // Top and Bottom Horizontal Border
-    if (snakeY < 2 || snakeY >= screenHeight) {
+    if (snake[0].y < 2 || snake[0].y >= screenHeight) {
         return true;
     }
 };
 
+checkApple = () => {    
+    if (snake[0].x == appleX && snake[0].y == appleY) {
+        this.snakeSpeed += 1;
+        points += 1;
+
+        drawApple();
+    }
+}
+
 removeSnake = () => {
+    let tail;
+
+    if (snake.length > snakeSize)
+        tail = snake.pop();
+    else
+        tail = snake[0];
+
     renderer.setCursorColor(2); // White
-    renderer.drawPoint(snakeX, snakeY);
+    renderer.drawPoint(tail.x, tail.y);
 };
 
 moveSnake = () => {
-    snakeX += this.directionX;
-    snakeY += this.directionY;
+    snake[0].x += this.directionX;
+    snake[0].y += this.directionY;
 };
 
 drawSnake = () => {
     // renderer.setCursorColor(4); // Yellow
     renderer.resetBackground();
-    renderer.drawPoint(snakeX, snakeY);
+    renderer.drawPoint(snake[0].x, snake[0].y);
 };
 
 drawApple = () => {
-    appleX = getRandomNumber(2, screenWidth);
-    appleY = getRandomNumber(2, screenHeight);
+    appleX = getRandomNumber(2, playWidth);
+    appleY = getRandomNumber(2, playHeight);
 
     renderer.setCursorColor(3); // Green
     renderer.drawPoint(appleX, appleY);
 };
 
 getRandomNumber = (min, max) => {
-    return Math.random() * (max - min) + min;
+    return Math.floor(Math.random() * (max - min) + min);
 };
+
+// Draw an apple
+drawApple();
