@@ -8,6 +8,7 @@ const cursor = ansi(process.stdout);
 // 3    =   Green
 // 4    =   Yellow
 // 5    =   Blue
+// 6    =   Grey
 module.exports.setCursorColor = (color) => {
     switch (color) {
         case 0:
