@@ -1,11 +1,5 @@
-// Wrapper class for rendering stuff on the screen
-
 const ansi = require('ansi');
 const cursor = ansi(process.stdout);
-
-module.exports.hideCursor = () => {
-    cursor.write('\x1B[?25l');
-}
 
 // Colors: 
 // 0    =   Black
@@ -48,6 +42,10 @@ module.exports.setCursorColor = (color) => {
 
 module.exports.resetBackground = () => {
     cursor.bg.reset();
+}
+
+module.exports.hideCursor = () => {
+    cursor.write('\x1B[?25l');
 }
 
 module.exports.drawPoint = (x, y) => {

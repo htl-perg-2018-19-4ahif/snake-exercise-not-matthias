@@ -1,43 +1,57 @@
-// Renderer instance
 const renderer = require("./renderer");
+const directions = require('./directions');
+const colors = require('./colors');
 
 // Sizes
-const screenWidth = 40;
-const screenHeight = 20;
+const SCREEN_SIZE = {
+    x: 0,
+    y: 0,
+    width: 40,
+    height: 20
+}
 
-const playWidth = screenWidth - 2;
-const playHeight = screenHeight - 2;
+const PLAY_SIZE = {
+    x: 2,
+    y: 2,
+    width: SCREEN_SIZE.width - 2,
+    height: SCREEN_SIZE.height - 2
+}
 
 // Game stuff
 let snake = [{
-    x: screenWidth / 2,
-    y: screenHeight / 2
+    x: Math.floor(SCREEN_SIZE.width / 2),
+    y: Math.floor(SCREEN_SIZE.height / 2)
 }];
-
-let appleX;
-let appleY;
 
 let snakeSize = 1;
 
-// Statistics
+let applePosition = {
+    x: 0,
+    y: 0
+}
+
+
+// Settings
 module.exports.snakeSpeed = 3;
 let points = 0;
 let gameOver = false;
 
 
-// Directions
-module.exports.directionX = 1;
-module.exports.directionY = 0;
 
+// Directions
+module.exports.direction = directions.DIRECTION_LEFT;
+
+
+// Render stuff
 renderer.hideCursor();
 
 // Draw Borders
-renderer.setCursorColor(5); // Blue
-renderer.drawRect(0, 0, screenWidth, screenHeight);
+renderer.setCursorColor(colors.BLUE);
+renderer.drawRect(SCREEN_SIZE.x, SCREEN_SIZE.y, SCREEN_SIZE.width, SCREEN_SIZE.height);
 
 // Draw filled rect inside
-renderer.setCursorColor(2); // White
-renderer.drawFilledRect(2, 2, playWidth - 1, playHeight);
+renderer.setCursorColor(colors.WHITE); // White
+renderer.drawFilledRect(PLAY_SIZE.x, PLAY_SIZE.y, PLAY_SIZE.width - 1, PLAY_SIZE.height);
 
 
 module.exports.mainLoop = () => {
@@ -51,10 +65,10 @@ module.exports.mainLoop = () => {
 
     // Check if outside, if not draw
     if ((gameOver = checkBorders())) {
-        renderer.setCursorColor(1); // Red
+        renderer.setCursorColor(colors.RED); // Red
 
         let middleOffset = Math.floor("Game Over".length / 2);
-        renderer.drawText(screenWidth / 2 - middleOffset, screenHeight / 2, "Game Over");
+        renderer.drawText(SCREEN_SIZE.s / 2 - middleOffset, screenHeight / 2, "Game Over");
     } else {
         drawSnake();
     }
@@ -62,38 +76,35 @@ module.exports.mainLoop = () => {
 
     // Print statistic
     let score = "Score: " + points;
-    renderer.drawText(0, screenHeight + 2, score);
+    renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 2, score);
 
     let speed = "Speed: " + this.snakeSpeed;
-    renderer.drawText(0, screenHeight + 3, speed);
-
-    renderer.drawText(0, screenHeight + 5, snake[0].x + "");
-    renderer.drawText(0, screenHeight + 6, snake[0].y + "");
+    renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 3, speed);
 };
 
 
 checkBorders = () => {
     // Left and Right Vertical Border
-    if (snake[0].x < 2 || snake[0].x >= screenWidth) {
+    if (snake[0].x < 2 || snake[0].x >= SCREEN_SIZE.width) {
         return true;
     }
 
     // Top and Bottom Horizontal Border
-    if (snake[0].y < 2 || snake[0].y >= screenHeight) {
+    if (snake[0].y < 2 || snake[0].y >= SCREEN_SIZE.height) {
         return true;
     }
 };
 
 checkApple = () => {
-    if (snake[0].x == appleX && snake[0].y == appleY) {
+    if (snake[0].x == applePosition.x && snake[0].y == applePosition.y) {
         this.snakeSpeed += 1;
         points += 1;
         snakeSize += 1;
 
         // add new head
         snake.unshift({
-            x: snake[0].x + this.directionX,
-            y: snake[0].y + this.directionY
+            x: snake[0].x + this.direction.x,
+            y: snake[0].y + this.direction.y
         });
 
         drawApple();
@@ -103,41 +114,36 @@ checkApple = () => {
 }
 
 removeSnake = () => {
-    let tail;
+    let tail = snake[snake.length - 1];
 
-    if (snake.length > snakeSize)
-        tail = snake.pop();
-    else
-        tail = snake[0];
-
-    renderer.setCursorColor(2); // White
+    renderer.setCursorColor(colors.WHITE);
     renderer.drawPoint(tail.x, tail.y);
 };
 
 moveSnake = () => {
     // add new head
     snake.unshift({
-        x: snake[0].x + this.directionX,
-        y: snake[0].y + this.directionY
+        x: snake[0].x + this.direction.x,
+        y: snake[0].y + this.direction.y
     });
 
     // remove the tail
-    if(snake > 1)
+    if (snake.length > 1)
         snake.pop();
 };
 
 drawSnake = () => {
-    // renderer.setCursorColor(4); // Yellow
+    // renderer.setCursorColor(colors.YELLOW); // Yellow
     renderer.resetBackground();
     renderer.drawPoint(snake[0].x, snake[0].y);
 };
 
 drawApple = () => {
-    appleX = getRandomNumber(2, playWidth);
-    appleY = getRandomNumber(2, playHeight);
+    applePosition.x = getRandomNumber(2, PLAY_SIZE.width);
+    applePosition.y = getRandomNumber(2, PLAY_SIZE.height);
 
-    renderer.setCursorColor(3); // Green
-    renderer.drawPoint(appleX, appleY);
+    renderer.setCursorColor(colors.GREEN); // Green
+    renderer.drawPoint(applePosition.x, applePosition.y);
 };
 
 getRandomNumber = (min, max) => {

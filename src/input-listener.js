@@ -1,5 +1,6 @@
 const keypress = require('keypress');
-const snake = require('./snake')
+const snake = require('./snake');
+const directions = require('./directions');
 
 
 // List for keyboard inputs
@@ -17,23 +18,19 @@ process.stdin.on('keypress', function (ch, key) {
 
     switch (key.name) {
         case 'left':
-            snake.directionX = -1;
-            snake.directionY = 0;
+            snake.direction = directions.DIRECTION_LEFT;
             break;
 
         case 'up':
-            snake.directionX = 0;
-            snake.directionY = -1;
+            snake.direction = directions.DIRECTION_UP;
             break;
 
         case 'right':
-            snake.directionX = 1;
-            snake.directionY = 0;
+            snake.direction = directions.DIRECTION_RIGHT;
             break;
 
         case 'down':
-            snake.directionX = 0;
-            snake.directionY = 1;
+            snake.direction = directions.DIRECTION_DOWN;
             break;
 
         case 'c':
