@@ -33,20 +33,17 @@ let applePosition = {
 
 // Settings
 module.exports.snakeSpeed = 3;
+module.exports.direction = directions.DIRECTION_LEFT;
+
 let points = 0;
 let gameOver = false;
-
-
-
-// Directions
-module.exports.direction = directions.DIRECTION_LEFT;
 
 
 // Render stuff
 renderer.hideCursor();
 
 // Draw Borders
-renderer.setCursorColor(colors.BLUE);
+renderer.setCursorColor(colors.GREY);
 renderer.drawRect(SCREEN_SIZE.x, SCREEN_SIZE.y, SCREEN_SIZE.width, SCREEN_SIZE.height);
 
 // Draw filled rect inside
@@ -68,7 +65,8 @@ module.exports.mainLoop = () => {
         renderer.setCursorColor(colors.RED); // Red
 
         let middleOffset = Math.floor("Game Over".length / 2);
-        renderer.drawText(SCREEN_SIZE.s / 2 - middleOffset, screenHeight / 2, "Game Over");
+        renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, "Game Over");
+        renderer.resetBackground();
     } else {
         drawSnake();
     }
