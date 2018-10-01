@@ -111,6 +111,15 @@ checkApple = () => {
     return false;
 }
 
+checkSnake = () => {
+    // Check if the head is already in the snake pos list
+    snake.forEach(position => {
+        if(snake[0].x == position.x && snake[0].y == position.y) {
+            renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 5, "Snake collided!");
+        }
+    });
+}
+
 removeSnake = () => {
     let tail = snake[snake.length - 1];
 
