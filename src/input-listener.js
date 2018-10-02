@@ -18,19 +18,23 @@ process.stdin.on('keypress', function (ch, key) {
 
     switch (key.name) {
     case 'left':
-        snake.direction = directions.DIRECTION_LEFT;
+        if(snake.direction != directions.DIRECTION_RIGHT)
+            snake.direction = directions.DIRECTION_LEFT;
         break;
 
     case 'up':
-        snake.direction = directions.DIRECTION_UP;
+        if(snake.direction != directions.DIRECTION_DOWN)
+            snake.direction = directions.DIRECTION_UP;
         break;
 
     case 'right':
-        snake.direction = directions.DIRECTION_RIGHT;
+        if(snake.direction != directions.DIRECTION_LEFT)
+            snake.direction = directions.DIRECTION_RIGHT;
         break;
 
     case 'down':
-        snake.direction = directions.DIRECTION_DOWN;
+        if(snake.direction != directions.DIRECTION_UP)
+            snake.direction = directions.DIRECTION_DOWN;
         break;
 
     case 'c':
