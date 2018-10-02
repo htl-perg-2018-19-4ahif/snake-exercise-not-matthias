@@ -19,9 +19,46 @@ const PLAY_SIZE = {
 
 // Game stuff
 let snake = [{
-    x: Math.floor(SCREEN_SIZE.width / 2),
-    y: Math.floor(SCREEN_SIZE.height / 2)
-}];
+        x: 5, // Math.floor(SCREEN_SIZE.width / 2),
+        y: 5 // Math.floor(SCREEN_SIZE.height / 2)
+    },
+    {
+        x: 5,
+        y: 6
+    },
+    {
+        x: 5,
+        y: 7
+    },
+    {
+        x: 5,
+        y: 8
+    },
+    {
+        x: 5,
+        y: 9
+    },
+    {
+        x: 5,
+        y: 10
+    },
+    {
+        x: 5,
+        y: 11
+    },
+    {
+        x: 5,
+        y: 12
+    },
+    {
+        x: 5,
+        y: 13
+    },
+    {
+        x: 5,
+        y: 14
+    }
+];
 
 let snakeSize = 1;
 
@@ -33,7 +70,7 @@ let applePosition = {
 
 // Settings
 module.exports.snakeSpeed = 3;
-module.exports.direction = directions.DIRECTION_LEFT;
+module.exports.direction = directions.DIRECTION_RIGHT;
 
 let points = 0;
 let gameOver = false;
@@ -61,7 +98,7 @@ module.exports.mainLoop = () => {
 
 
     // Check if outside, if not draw
-    if ((gameOver = checkBorders())) {
+    if ((gameOver = checkBorders()) || (gameOver = checkSnake())) {
         renderer.setCursorColor(colors.RED); // Red
 
         let middleOffset = Math.floor("Game Over".length / 2);
@@ -112,12 +149,14 @@ checkApple = () => {
 }
 
 checkSnake = () => {
-    // Check if the head is already in the snake pos list
-    snake.forEach(position => {
-        if(snake[0].x == position.x && snake[0].y == position.y) {
-            renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 5, "Snake collided!");
-        }
-    });
+    for (let i = 1; i < snake.length; i++) {
+        const position = snake[i];
+
+        if (snake[0].x == position.x && snake[0].y == position.y)
+            return true;
+    }
+
+    return false;
 }
 
 removeSnake = () => {
