@@ -10,13 +10,13 @@ process.stdout.write('\x1Bc');
 // ###########################################
 //              Input listener
 // ###########################################
-require('./input-listener.js')
+require('./input-listener.js');
 
 
 // ###########################################
 //              Draw Function
 // ###########################################
-const snake = require('./snake')
+const snake = require('./snake');
 
 let oldSpeed = snake.snakeSpeed;
 let mainInterval = setInterval(snake.mainLoop, 1000 / snake.snakeSpeed);

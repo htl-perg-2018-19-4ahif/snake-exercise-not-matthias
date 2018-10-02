@@ -17,27 +17,27 @@ process.stdin.on('keypress', function (ch, key) {
     // ArrowDown    = 40        = down
 
     switch (key.name) {
-        case 'left':
-            snake.direction = directions.DIRECTION_LEFT;
-            break;
+    case 'left':
+        snake.direction = directions.DIRECTION_LEFT;
+        break;
 
-        case 'up':
-            snake.direction = directions.DIRECTION_UP;
-            break;
+    case 'up':
+        snake.direction = directions.DIRECTION_UP;
+        break;
 
-        case 'right':
-            snake.direction = directions.DIRECTION_RIGHT;
-            break;
+    case 'right':
+        snake.direction = directions.DIRECTION_RIGHT;
+        break;
 
-        case 'down':
-            snake.direction = directions.DIRECTION_DOWN;
-            break;
+    case 'down':
+        snake.direction = directions.DIRECTION_DOWN;
+        break;
 
-        case 'c':
-            if (key.ctrl)
-                process.exit(0);
-            else
-                break;
+    case 'c':
+        if (key.ctrl)
+            process.exit(0);
+        else
+            break;
     }
 });
 
