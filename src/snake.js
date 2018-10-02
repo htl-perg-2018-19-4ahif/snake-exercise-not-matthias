@@ -154,7 +154,7 @@ drawApple = () => {
 
         // check apple collision
         for (const position of snake) {
-            if (position.x == applePosition.x && position.y == applePosition.y)
+            if (position.x != applePosition.x && position.y != applePosition.y)
                 validPoint = true;
         }
     } while (!validPoint);
