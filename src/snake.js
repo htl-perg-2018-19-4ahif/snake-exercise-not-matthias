@@ -70,7 +70,7 @@ module.exports.mainLoop = () => {
     }
 
     renderer.resetBackground();
-    
+
     let score = "Score: " + points;
     renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 2, score);
 
@@ -146,8 +146,18 @@ drawSnake = () => {
 };
 
 drawApple = () => {
-    applePosition.x = getRandomNumber(2, PLAY_SIZE.width);
-    applePosition.y = getRandomNumber(2, PLAY_SIZE.height);
+    let validPoint = false;
+
+    do {
+        applePosition.x = getRandomNumber(2, PLAY_SIZE.width);
+        applePosition.y = getRandomNumber(2, PLAY_SIZE.height);
+
+        // check apple collision
+        for (const position of snake) {
+            if (position.x == applePosition.x && position.y == applePosition.y)
+                validPoint = true;
+        }
+    } while (!validPoint);
 
     renderer.setCursorColor(colors.GREEN); // Green
     renderer.drawPoint(applePosition.x, applePosition.y);
