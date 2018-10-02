@@ -19,46 +19,9 @@ const PLAY_SIZE = {
 
 // Game stuff
 let snake = [{
-        x: 5, // Math.floor(SCREEN_SIZE.width / 2),
-        y: 5 // Math.floor(SCREEN_SIZE.height / 2)
-    },
-    {
-        x: 5,
-        y: 6
-    },
-    {
-        x: 5,
-        y: 7
-    },
-    {
-        x: 5,
-        y: 8
-    },
-    {
-        x: 5,
-        y: 9
-    },
-    {
-        x: 5,
-        y: 10
-    },
-    {
-        x: 5,
-        y: 11
-    },
-    {
-        x: 5,
-        y: 12
-    },
-    {
-        x: 5,
-        y: 13
-    },
-    {
-        x: 5,
-        y: 14
-    }
-];
+    x: Math.floor(SCREEN_SIZE.width / 2),
+    y: Math.floor(SCREEN_SIZE.height / 2)
+}];
 
 let snakeSize = 1;
 
@@ -90,16 +53,14 @@ renderer.drawFilledRect(PLAY_SIZE.x, PLAY_SIZE.y, PLAY_SIZE.width - 1, PLAY_SIZE
 
 module.exports.mainLoop = () => {
 
-    // Only move when ingame or not eating an apple
     if (!gameOver && !checkApple()) {
         removeSnake();
         moveSnake();
     }
 
-
-    // Check if outside, if not draw
+    // Check some stuff
     if ((gameOver = checkBorders()) || (gameOver = checkSnake())) {
-        renderer.setCursorColor(colors.RED); // Red
+        renderer.setCursorColor(colors.RED);
 
         let middleOffset = Math.floor("Game Over".length / 2);
         renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, "Game Over");
@@ -108,8 +69,8 @@ module.exports.mainLoop = () => {
         drawSnake();
     }
 
-
-    // Print statistic
+    renderer.resetBackground();
+    
     let score = "Score: " + points;
     renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 2, score);
 
@@ -152,6 +113,7 @@ checkSnake = () => {
     for (let i = 1; i < snake.length; i++) {
         const position = snake[i];
 
+        // Collided?
         if (snake[0].x == position.x && snake[0].y == position.y)
             return true;
     }
@@ -179,8 +141,7 @@ moveSnake = () => {
 };
 
 drawSnake = () => {
-    // renderer.setCursorColor(colors.YELLOW); // Yellow
-    renderer.resetBackground();
+    renderer.setCursorColor(colors.YELLOW);
     renderer.drawPoint(snake[0].x, snake[0].y);
 };
 
