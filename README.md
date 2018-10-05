@@ -13,7 +13,7 @@ npm install
 npm start
 ```
 
-Use <kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Left</kbd> and <kbd>Right</kbd> to move and <kbd>ESC</kbd> to quit. Collect apples to grow. 
+Use <kbd>Up</kbd>, <kbd>Down</kbd>, <kbd>Left</kbd> and <kbd>Right</kbd> to move and <kbd>CTRL+C</kbd> to quit. Collect apples to grow. 
 
 
 ## Credits
