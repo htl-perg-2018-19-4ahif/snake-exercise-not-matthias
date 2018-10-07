@@ -34,7 +34,6 @@ module.exports.snakeSpeed = 3;
 module.exports.direction = directions.DIRECTION_RIGHT;
 
 let points = 0;
-let gameOver = false;
 
 
 // Render stuff
@@ -51,19 +50,19 @@ renderer.drawFilledRect(PLAY_SIZE.x, PLAY_SIZE.y, PLAY_SIZE.width - 1, PLAY_SIZE
 
 module.exports.mainLoop = () => {
 
-    if (!gameOver && !checkApple()) {
+    if (!checkApple()) {
         removeSnake();
         moveSnake();
     }
 
-    // Check some stuff
-    if ((gameOver = checkBorders()) || (gameOver = checkSnake())) {
+    // Game Over Check
+    if (checkBorders() || checkSnake()) {
         renderer.setCursorColor(colors.RED);
 
         const middleOffset = Math.floor('Game Over'.length / 2);
         renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, 'Game Over');
         renderer.resetBackground();
-        
+
         // Show cursor again
         process.stdout.write('\x1B[?25h');
 
@@ -71,10 +70,13 @@ module.exports.mainLoop = () => {
         renderer.drawPoint(SCREEN_SIZE.x, SCREEN_SIZE.height + 4);
 
         process.exit(0);
-    } else {
-        drawSnake();
     }
 
+    // Move snake after validation
+    drawSnake();
+
+
+    // Draw Statistics
     renderer.resetBackground();
 
     let score = 'Score: ' + points;
