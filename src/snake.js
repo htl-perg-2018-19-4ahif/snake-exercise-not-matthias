@@ -60,9 +60,17 @@ module.exports.mainLoop = () => {
     if ((gameOver = checkBorders()) || (gameOver = checkSnake())) {
         renderer.setCursorColor(colors.RED);
 
-        let middleOffset = Math.floor('Game Over'.length / 2);
+        const middleOffset = Math.floor('Game Over'.length / 2);
         renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, 'Game Over');
         renderer.resetBackground();
+        
+        // Show cursor again
+        process.stdout.write('\x1B[?25h');
+
+        // Set cursor pos below the actual "game screen"
+        renderer.drawPoint(SCREEN_SIZE.x, SCREEN_SIZE.height + 4);
+
+        process.exit(0);
     } else {
         drawSnake();
     }
