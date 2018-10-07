@@ -23,8 +23,6 @@ let snake = [{
     y: Math.floor(SCREEN_SIZE.height / 2)
 }];
 
-let snakeSize = 1;
-
 let applePosition = {
     x: 0,
     y: 0
@@ -95,7 +93,6 @@ const checkApple = () => {
     if (snake[0].x == applePosition.x && snake[0].y == applePosition.y) {
         this.snakeSpeed += 1;
         points += 1;
-        this.snakeSize += 1;
 
         // add new head
         snake.unshift({
