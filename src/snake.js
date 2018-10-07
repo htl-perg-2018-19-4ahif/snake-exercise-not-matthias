@@ -63,7 +63,7 @@ module.exports.mainLoop = () => {
         renderer.setCursorColor(colors.RED);
 
         let middleOffset = Math.floor('Game Over'.length / 2);
-        renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, "Game Over");
+        renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, 'Game Over');
         renderer.resetBackground();
     } else {
         drawSnake();
@@ -76,15 +76,10 @@ module.exports.mainLoop = () => {
 
     let speed = 'Speed: ' + this.snakeSpeed;
     renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 3, speed);
-
-    asdf();
 };
 
-function asdf() {
 
-}
-
-checkBorders = () => {
+const checkBorders = () => {
     // Left and Right Vertical Border
     if (snake[0].x < 2 || snake[0].x >= SCREEN_SIZE.width) {
         return true;
@@ -96,7 +91,7 @@ checkBorders = () => {
     }
 };
 
-checkApple = () => {
+const checkApple = () => {
     if (snake[0].x == applePosition.x && snake[0].y == applePosition.y) {
         this.snakeSpeed += 1;
         points += 1;
@@ -112,9 +107,9 @@ checkApple = () => {
         return true;
     }
     return false;
-}
+};
 
-checkSnake = () => {
+const checkSnake = () => {
     for (let i = 1; i < snake.length; i++) {
         const position = snake[i];
 
@@ -124,16 +119,16 @@ checkSnake = () => {
     }
 
     return false;
-}
+};
 
-removeSnake = () => {
+const removeSnake = () => {
     let tail = snake[snake.length - 1];
 
     renderer.setCursorColor(colors.WHITE);
     renderer.drawPoint(tail.x, tail.y);
 };
 
-moveSnake = () => {
+const moveSnake = () => {
     // add new head
     snake.unshift({
         x: snake[0].x + this.direction.x,
@@ -145,12 +140,12 @@ moveSnake = () => {
         snake.pop();
 };
 
-drawSnake = () => {
+const drawSnake = () => {
     renderer.setCursorColor(colors.YELLOW);
     renderer.drawPoint(snake[0].x, snake[0].y);
 };
 
-drawApple = () => {
+const drawApple = () => {
     let validPoint = false;
 
     do {
@@ -168,7 +163,7 @@ drawApple = () => {
     renderer.drawPoint(applePosition.x, applePosition.y);
 };
 
-getRandomNumber = (min, max) => {
+const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
 };
 
