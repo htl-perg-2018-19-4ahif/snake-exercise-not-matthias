@@ -1,4 +1,4 @@
-const renderer = require("./renderer");
+const renderer = require('./renderer');
 const directions = require('./directions');
 const colors = require('./colors');
 
@@ -8,14 +8,14 @@ const SCREEN_SIZE = {
     y: 0,
     width: 40,
     height: 20
-}
+};
 
 const PLAY_SIZE = {
     x: 2,
     y: 2,
     width: SCREEN_SIZE.width - 2,
     height: SCREEN_SIZE.height - 2
-}
+};
 
 // Game stuff
 let snake = [{
@@ -28,7 +28,7 @@ let snakeSize = 1;
 let applePosition = {
     x: 0,
     y: 0
-}
+};
 
 
 // Settings
@@ -62,7 +62,7 @@ module.exports.mainLoop = () => {
     if ((gameOver = checkBorders()) || (gameOver = checkSnake())) {
         renderer.setCursorColor(colors.RED);
 
-        let middleOffset = Math.floor("Game Over".length / 2);
+        let middleOffset = Math.floor('Game Over'.length / 2);
         renderer.drawText(SCREEN_SIZE.width / 2 - middleOffset, SCREEN_SIZE.height / 2, "Game Over");
         renderer.resetBackground();
     } else {
@@ -71,13 +71,18 @@ module.exports.mainLoop = () => {
 
     renderer.resetBackground();
 
-    let score = "Score: " + points;
+    let score = 'Score: ' + points;
     renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 2, score);
 
-    let speed = "Speed: " + this.snakeSpeed;
+    let speed = 'Speed: ' + this.snakeSpeed;
     renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 3, speed);
+
+    asdf();
 };
 
+function asdf() {
+
+}
 
 checkBorders = () => {
     // Left and Right Vertical Border
@@ -95,7 +100,7 @@ checkApple = () => {
     if (snake[0].x == applePosition.x && snake[0].y == applePosition.y) {
         this.snakeSpeed += 1;
         points += 1;
-        snakeSize += 1;
+        this.snakeSize += 1;
 
         // add new head
         snake.unshift({
