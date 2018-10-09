@@ -13,14 +13,6 @@ require('./input-listener.js');
 // ###########################################
 const snake = require('./snake');
 
-let oldSpeed = snake.snakeSpeed;
-let mainInterval = setInterval(snake.mainLoop, 1000 / snake.snakeSpeed);
+// Start the game
+snake.mainLoop();
 
-
-// check if the speed has changed
-setInterval(() => {
-    if (oldSpeed !== snake.snakeSpeed) {
-        clearInterval(mainInterval);
-        mainInterval = setInterval(snake.mainLoop, 1000 / snake.snakeSpeed);
-    }
-}, 1000);

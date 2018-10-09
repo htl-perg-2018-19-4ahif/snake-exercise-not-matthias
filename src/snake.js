@@ -30,7 +30,7 @@ let applePosition = {
 
 
 // Settings
-module.exports.snakeSpeed = 3;
+let snakeSpeed = 3;
 module.exports.direction = directions.DIRECTION_RIGHT;
 
 let points = 0;
@@ -46,7 +46,6 @@ renderer.drawRect(SCREEN_SIZE.x, SCREEN_SIZE.y, SCREEN_SIZE.width, SCREEN_SIZE.h
 // Draw filled rect inside
 renderer.setCursorColor(colors.WHITE); // White
 renderer.drawFilledRect(PLAY_SIZE.x, PLAY_SIZE.y, PLAY_SIZE.width - 1, PLAY_SIZE.height);
-
 
 module.exports.mainLoop = () => {
 
@@ -72,18 +71,12 @@ module.exports.mainLoop = () => {
         process.exit(0);
     }
 
-    // Move snake after validation
     drawSnake();
+    drawStatistics();
 
 
-    // Draw Statistics
-    renderer.resetBackground();
-
-    let score = 'Score: ' + points;
-    renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 2, score);
-
-    let speed = 'Speed: ' + this.snakeSpeed;
-    renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 3, speed);
+    // Call mainLoop again
+    setTimeout(this.mainLoop, Math.max(100, 500 - snakeSpeed * 30));
 };
 
 
@@ -101,7 +94,7 @@ const checkBorders = () => {
 
 const checkApple = () => {
     if (snake[0].x == applePosition.x && snake[0].y == applePosition.y) {
-        this.snakeSpeed += 1;
+        snakeSpeed += 1;
         points += 1;
 
         // add new head
@@ -145,6 +138,16 @@ const moveSnake = () => {
     // remove the tail
     if (snake.length > 1)
         snake.pop();
+};
+
+const drawStatistics = () => {
+    renderer.resetBackground();
+
+    let score = 'Score: ' + points;
+    renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 2, score);
+
+    let speed = 'Speed: ' + snakeSpeed;
+    renderer.drawText(SCREEN_SIZE.x, SCREEN_SIZE.height + 3, speed);    
 };
 
 const drawSnake = () => {
